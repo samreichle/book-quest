@@ -1,0 +1,302 @@
+/*Sam Reichle 10/10/2020*/
+
+/*general styles*/
+body {
+    background-color: antiquewhite;
+    margin: 0;
+    height: 100%;
+}
+
+footer {
+    margin: 50px 50px;
+}
+
+a {
+    color: black;
+}
+
+li {
+    list-style-type: none;
+}
+
+.html {
+    background-color: antiquewhite;
+}
+
+.headerDesktop {
+    background-color: maroon;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.headerMobile {
+    display: none;
+}
+
+.container {
+    background-color: antiquewhite;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    padding:0 30px;
+    border-radius: 3px;
+}
+
+.pageHeader {
+    font-size: 55px;
+    font-weight: bold;
+}
+
+.navLinks {
+    text-decoration: none;
+    color:white;
+}
+
+/*header styles*/
+#headerImage {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+}
+
+#headerCenter {
+    margin-left:30px;
+}
+
+.headerUlRight {
+    display: flex;
+    margin-top: 120px;
+    margin-right: 70px;
+}
+
+.headerUlLeft {
+    display: flex;
+    margin-top: 120px;
+    margin-left: 25px;
+}
+
+.headerLiRight {
+    font-size: 25px;
+    list-style-type: none;
+    margin-right: 100px;
+}
+
+.headerLiLeft {
+    font-size: 25px;
+    list-style-type: none;
+    margin-left: 100px;
+}
+
+.headerLi:hover {
+    opacity: 70%;
+}
+
+.active {
+    color: black;
+}
+
+/*index.html styles*/
+#indexHtml {
+    background: url(../images/bookquest.jpg);
+}
+
+#indexHeader {
+    display: block;
+    background: none;
+}
+
+#indexH1 {
+    font-size: 100px;
+}
+
+#indexBody {
+    background: none;
+    color: white;
+    font-size: 25px;
+    margin-left: 50px;
+    text-shadow: 2px 2px black;
+}
+
+#indexNav {
+    font-size: 40px;
+}
+
+#indexA {
+    color: white;
+}
+
+.indexNavLinks {
+    color: white;
+    font-size: 55px;
+    text-decoration: none;
+}
+
+  @keyframes bounce-side {
+    0% {
+      left: 0;
+    }
+    20% {
+      left: 10px;
+    }
+    40% {
+      left: 0;
+    }
+    100% {
+      left: 0;
+    }
+  }
+
+.indexNavLinks:hover {
+    position: relative;
+    animation: bounce-side 3s infinite;
+    animation-timing-function: cubic-bezier(0.28, 0.84, 0.42, 1);
+}
+
+/*recommended.html styles*/
+.rec {
+    border-bottom: 1px solid;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.recTopFive {
+    display: block;
+    margin-left: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+}
+
+.topFiveHeader {
+    margin: 0 100px;
+    font-size: 30px;
+}
+
+.topFiveLi {
+    padding-bottom: 10px;
+    list-style-type: decimal;
+}
+
+/*search.html styles*/
+#searchApi {
+    padding: 20px 0;
+}
+
+#searchInput {
+    width: 20%;
+}
+
+/*media query*/
+@media only screen and (max-width: 1024px) { 
+    .headerDesktop {
+        display: none;
+    }
+    
+    .headerMobile {
+        background-color: maroon;
+        display: flex;
+        flex-direction: column;
+        margin-left: auto;
+        font-size: 20px;
+        justify-content: space-around;
+        width: 160%;
+    }
+    
+    .headerMobile h1 {
+        float: none; 
+        width: auto; 
+        text-align: center; 
+        font-size: 500%;
+    }
+    
+    .headerMobile nav { 
+        float: none; 
+        width: auto; 
+        padding-right: 3%;}      
+    .headerMobile nav ul { 
+        text-align: center;
+    }     
+    
+    .headerMobile nav a { 
+        border-style: none; 
+        font-size: 400%;
+    }
+    
+    .headerLiRight {
+        font-size: 200%;
+    }
+    
+    .headerLiLeft {
+        font-size: 200%;
+    }
+    
+    .pageHeader {
+        font-weight: bold;
+        font-size: 300%;
+    }
+    
+    .container {
+        font-size: 350%;
+        width: 150%;
+    }
+    
+    .rec {
+        border-bottom: 1px solid;
+        display: block;
+        margin-left:auto;
+        margin-right: auto;
+        padding-bottom: 20px;
+    }
+    
+    .topFiveHeader {
+        display: none;
+    }
+    
+    .recTopFive {
+        display: block;
+        margin-left: 50px;
+    }
+    
+    .recVideo {
+        width: 97%;
+        height: 600px;
+    }
+    
+    #searchButton {
+        height: 100px;
+        width:600px;
+        font-size:60px;
+    }
+    
+    #searchInput {
+        height: 100px;
+        width: 600px;
+        font-size:60px;
+    }
+    
+    #indexHeader {
+        background: none;
+        display: block;
+        margin-top: 20%;
+    }
+    
+    #indexBody {
+        background: none;
+        color: white;
+        font-size: 350%;
+        margin-left: 50px;
+        text-shadow: 2px 2px black;
+    }
+    
+    footer {
+    margin-top: 100%;
+    margin-bottom: 50px;
+    }
+}

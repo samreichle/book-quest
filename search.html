@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html class="html" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Search</title>
+        <link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
+        <!--uses Google Books API to search for a specific book.-->
+    </head>
+    <body>
+        <header class="headerDesktop">
+            <div>
+                <nav>
+                    <ul class="headerUlLeft">
+                        <li class="headerLiLeft"><a class="navLinks" href="classics.html">Classics</a></li>
+                        <li class="headerLiLeft"><a class="navLinks" href="recommended.html">Recommended</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="headerCenter">
+                <h1><a class="navLinks" href="index.html">BookQuest</a></h1>
+                <img id="headerImage" src="images/Open-Book-Transparent.png" alt="BookHeader" height="50">
+            </div>
+            <div>
+                <nav>
+                    <ul class="headerUlRight">
+                        <li class="headerLiRight"><a class="navLinks" href="choice-awards.html">Choice Awards</a></li>
+                        <li class="headerLiRight"><a class="navLinks active" href="search.html">Search</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        
+        <header class="headerMobile">
+                <h1><a class="navLinks" href="index.html">BookQuest</a></h1>
+            <div>
+                <nav>
+                    <ul >
+                        <li><a class="navLinks" href="classics.html">Classics</a></li>
+                        <li> <a class="navLinks" href="recommended.html">Recommended</a></li>
+                        <li><a class="navLinks" href="choice-awards.html">Choice Awards</a></li>
+                        <li><a class="navLinks active" href="search.html">Search</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        
+        <main class="container">
+            <h2 class="pageHeader">Search</h2>
+            <form id="searchApi">
+                <input id="searchInput" type="text" placeholder="Enter Book Title or Author" name="query"> 
+                <button id="searchButton">Search</button>
+            </form>
+            <div id="searchedBooks">
+            </div>
+            <div id="title"></div>
+        </main>
+        
+        <footer>
+            <p>Sam Reichle &copy; 2020</p>
+            <p>Email: <a href="mailto:sreichle@crimson.ua.edu" target="_blank">sreichle@crimson.ua.edu</a></p>
+        </footer>
+        
+        <!--JS to fetch search results from Google Books API-->
+        <script>
+            
+            document.querySelector('#searchApi').addEventListener('submit', function(e) {
+                e.preventDefault()
+                var q = e.target.elements.query.value
+                apiSearch(q);
+            })
+            
+            function apiSearch(q) {
+                fetch(`https://www.googleapis.com/books/v1/volumes?q=${q}&key=AIzaSyBl4a9nWddNvWmwMykZc6rkfFj_V89xHz4`)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    appendData(data);
+                })
+                .catch(function (err) {
+                    console.log('error: ' + err);
+                });
+                function appendData(data) {
+                    var mainContainer = document.getElementById("searchedBooks");
+                    mainContainer.innerHTML = "";
+                    for (var i = 0; i < data.items.length; i++) {
+                        var title = document.createElement("h3");
+                        title.innerHTML = data.items[i].volumeInfo.title 
+                        var thumbnail = document.createElement("img");
+                        thumbnail.src = data.items[i].volumeInfo.imageLinks.thumbnail;
+                        var description = document.createElement("p");
+                        description.innerHTML = data.items[i].volumeInfo.description;
+                        var buyLink = document.createElement("a");
+                        buyLink.setAttribute("href", data.items[i].saleInfo.buyLink);
+                        buyLink.setAttribute("target", "_blank");
+                        buyLink.innerHTML = ("Google Play Link");
+                        
+                        
+                        mainContainer.appendChild(title);
+                        mainContainer.appendChild(thumbnail);
+                        mainContainer.appendChild(description);
+                        mainContainer.appendChild(buyLink);
+                    }
+                }
+            }
+        </script>
+        
+    </body>
+</html>

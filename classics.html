@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="html" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Classics</title>
+        <link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
+        <!--This page provides classic books using Google Books API.-->
+    </head>
+    <body>
+        <header class="headerDesktop">
+            <div>
+                <nav>
+                    <ul class="headerUlLeft">
+                        <li class="headerLiLeft"><a class="navLinks active" href="classics.html">Classics</a></li>
+                        <li class="headerLiLeft"><a class="navLinks" href="recommended.html">Recommended</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="headerCenter">
+                <h1><a class="navLinks" href="index.html">BookQuest</a></h1>
+                <img id="headerImage" src="images/Open-Book-Transparent.png" alt="BookHeader" height="50">
+            </div>
+            <div>
+                <nav>
+                    <ul class="headerUlRight">
+                        <li class="headerLiRight"><a class="navLinks" href="choice-awards.html">Choice Awards</a></li>
+                        <li class="headerLiRight"><a class="navLinks" href="search.html">Search</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        
+        <header class="headerMobile">
+                <h1><a class="navLinks" href="index.html">BookQuest</a></h1>
+            <div>
+                <nav>
+                    <ul >
+                        <li><a class="navLinks active" href="classics.html">Classics</a></li>
+                        <li> <a class="navLinks" href="recommended.html">Recommended</a></li>
+                        <li><a class="navLinks" href="choice-awards.html">Choice Awards</a></li>
+                        <li><a class="navLinks" href="search.html">Search</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        
+        <main class="container">
+            <h2 class="pageHeader">Classics</h2>
+            <div id="searchedBooks"></div>
+        </main>
+        
+        <footer>
+            <p>Sam Reichle &copy; 2020</p>
+            <p>Email: <a href="mailto:sreichle@crimson.ua.edu" target="_blank">sreichle@crimson.ua.edu</a></p>
+        </footer>
+        
+        <script>
+            window.addEventListener("load", function() {
+            var titles = ["To Kill a Mockingbird", "Pride and Prejudice", "1984", "The Great Gatsby", "The Count of Monte Cristo", "Invisible Man", "Night", "Wuthering Heights"];
+            var i;
+            for (i = 0; i < titles.length; i++) {
+                var q = titles[i];
+                        fetch(`https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=1&key=AIzaSyBl4a9nWddNvWmwMykZc6rkfFj_V89xHz4`)
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (data) {
+                            appendData(data);
+                        })
+                        .catch(function (err) {
+                            console.log('error: ' + err);
+                        });
+                        function appendData(data) {
+                            var mainContainer = document.getElementById("searchedBooks");
+                            for (var i = 0; i < data.items.length; i++) {
+                                var title = document.createElement("h3");
+                                title.innerHTML = data.items[i].volumeInfo.title 
+                                var thumbnail = document.createElement("img");
+                                thumbnail.src = data.items[i].volumeInfo.imageLinks.thumbnail;
+                                var description = document.createElement("p");
+                                description.innerHTML = data.items[i].volumeInfo.description;
+                                var buyLink = document.createElement("a");
+                                buyLink.setAttribute("href", data.items[i].saleInfo.buyLink);
+                                buyLink.setAttribute("target", "_blank");
+                                buyLink.innerHTML = ("Google Play Link");
+                                mainContainer.appendChild(title);
+                                mainContainer.appendChild(thumbnail);
+                                mainContainer.appendChild(description);
+                                mainContainer.appendChild(buyLink);
+                            }
+                        }
+                    }
+            })
+        </script>
+    </body>
+</html>
